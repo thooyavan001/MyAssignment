@@ -1,22 +1,52 @@
-package week1.day2;
+package week2.day1;
 
 public class Mobile {
-	String mobileBrandName ="Realme Xt";
-	char mobileLogo='R';
-	short noOfMobilePiece=20;
-	int modelNumber=7382516;
-	long mobileImeiNumber=1252405410;
-	float mobilePrice=30999.65F;
-	boolean isDamaged=false;
-	public static void main(String[] args) 
-	{
-		Mobile mob=new Mobile();
-		System.out.println(mob.mobileBrandName);
-		System.out.println("Mobile logo ="+mob.mobileLogo);
-		System.out.println("No. of mobile piece "+" ="+mob.noOfMobilePiece);
-		System.out.println("Mobile IMEI number "+" ="+mob.mobileImeiNumber);
-		System.out.println("Mobile price "+" ="+mob.mobilePrice);
-		System.out.println("Damaged "+" ="+mob.isDamaged);
-		
-}
+	public void switchOnMobile(){
+		System.out.println("Switch on the mobile");
+	}
+	public void plugInCharger(){
+        System.out.println("Plug in the charger");
+    }
+    public void unLockMobile(){
+        System.out.println("Unlock mobile");
+    }
+    public void insertSimCard(){
+        System.out.println("Insert sim card ");
+    }
+    public void logIn(){
+        System.out.println("Login using Gmail ID");
+    }
+    public void sync(){
+        System.out.println("Sync data");
+    }
+    public void call(){
+        System.out.println("Call");
+    }
+    public void text(){
+        System.out.println("Text");
+    }
+    public void voiceRecord(){
+        System.out.println("Voice record");
+    }
+    public void camera(){
+        System.out.println("Take pictures and videos");
+    }
+    public void installApplication(){
+        System.out.println("Install application");
+    }
+
+
+    public static void main(String[] args) {
+        Mobile kumsPhn = new Mobile();
+        kumsPhn.logIn();
+        kumsPhn.sync();
+        kumsPhn.plugInCharger();
+        kumsPhn.unLockMobile();
+        kumsPhn.insertSimCard();
+        kumsPhn.call();
+        kumsPhn.text();
+        kumsPhn.voiceRecord();
+        kumsPhn.camera();
+        kumsPhn.installApplication();
+    }
 }
