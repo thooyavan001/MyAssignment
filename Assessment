@@ -1,0 +1,87 @@
+package flipkarttest;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class FlipkartAutomation {
+
+	public static void main(String[] args) throws InterruptedException {
+        
+
+        // Initialize the WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Launch the Flipkart website
+            driver.get("https://www.flipkart.com/");
+
+            // Perform product search
+            String productName = "Power bank"; 
+            WebElement searchBox = driver.findElement(By.name("q"));
+            searchBox.sendKeys(productName);
+            searchBox.submit();
+            
+            Thread.sleep(2000);
+            // Select the first product from the search results
+            WebElement firstProduct = driver.findElement(By.xpath("(//a[@title='URBN 20000 mAh 12 W Power Bank'])"));
+            String productTitle = firstProduct.getText();
+            firstProduct.click();
+            
+            Set<String> windowHandles = driver.getWindowHandles();
+    		List<String> list = new ArrayList<String>(windowHandles);
+    		driver.switchTo().window(list.get(1));
+            
+            Thread.sleep(2000);
+            // Add the selected product to the cart
+            WebElement addToCartButton = driver.findElement(By.cssSelector("button._2KpZ6l._2U9uOA._3v1-ww"));
+            addToCartButton.click();
+            
+            
+            
+            Thread.sleep(2000);
+            
+            
+            WebElement placeorder = driver.findElement(By.xpath("//button[@class=\"_2KpZ6l _2ObVJD _3AWRsL\"]"));
+  		placeorder.click();
+   		Thread.sleep(2000);
+            
+            // Validate that the product is added to the cart
+            WebElement cartTitle = driver.findElement(By.xpath("//div[@class='zab8Yh _10k93p']"));
+            if (cartTitle.getText().contains(productTitle)) {
+                System.out.println("Product added to the cart successfully.");
+            } else {
+                System.out.println("Failed to add the product to the cart.");
+            }
+            
+            Thread.sleep(2000);
+            // Proceed to the cart
+            driver.get("https://www.flipkart.com/cart");
+
+            Thread.sleep(2000);
+            // Remove the product from the cart
+            WebElement removeButton = driver.findElement(By.cssSelector("button._2KpZ6l._3KxPIT"));
+            removeButton.click();
+
+            Thread.sleep(2000);
+            // Validate that the product is removed from the cart
+            WebElement emptyCartMessage = driver.findElement(By.cssSelector("div.YkSO1u > span"));
+            if (emptyCartMessage.getText().contains("Your cart is empty!")) {
+                System.out.println("Product removed from the cart successfully.");
+            } else {
+               System.out.println("Failed to remove the product from the cart.");
+            }
+
+       }finally {
+            //Close the browser
+            driver.quit();
+        
+   }
+        
+}
+}
